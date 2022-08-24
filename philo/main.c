@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:44:36 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/24 03:17:03 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/24 16:26:23 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,5 @@ int	main(int argc, char **argv)
 	}
 	else
 		write(2, "invalid arguments num\n", 23);
-	system("leaks philo");
 	return (0);
 }
