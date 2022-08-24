@@ -6,12 +6,13 @@
 #    By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 18:32:24 by yolee             #+#    #+#              #
-#    Updated: 2022/08/24 03:56:29 by yolee            ###   ########.fr        #
+#    Updated: 2022/08/24 15:04:52 by yolee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -pthread
+CFLAGS = -Wall -Werror -Wextra
+INCLUDE = -lpthread
 NAME = philo
 SRCS =	ft_atoi.c \
 		main.c \
@@ -27,7 +28,7 @@ all : $(NAME)
 	$(CC) $(CFLAGS) -c $? -o $@
 
 $(NAME) : $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDE)
 
 clean :
 	$(RM) $(OBJS)

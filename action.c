@@ -6,11 +6,16 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 22:49:54 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/24 03:46:34 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/24 15:40:30 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+static int	is_simul_ended(t_philo_data *philo_data)
+{
+	if ()
+}
 
 void	ft_sleep(int sleep_time_ms)
 {
