@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:16:23 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/24 16:38:58 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/24 16:49:21 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static void	check_philo(t_simul_data *simul_data, t_table_data *table_data)
 			min_eat_flag = 0;
 		loop++;
 	}
-	if (min_eat_flag == 1)
+	if (simul_data->is_min_eat_time_specified == 1 && min_eat_flag == 1)
 		simul_data->is_ended = 1;
 }
 
