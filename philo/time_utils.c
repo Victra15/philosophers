@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:15:59 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/24 04:15:19 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/25 03:24:17 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ int	conv_timeval_to_ms(struct timeval time_ev)
 	return (time_ms);
 }
 
-struct timeval	calc_curr_time(t_philo_data *philo_data)
+struct timeval	calc_curr_time(t_simul_data *simul_data)
 {
 	struct timeval	time_now;
 
 	gettimeofday(&time_now, NULL);
-	return (diff_timeval(time_now, philo_data->start_time));
+	return (diff_timeval(time_now, simul_data->start_time));
 }

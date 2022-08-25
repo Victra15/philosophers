@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:44:36 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/24 16:26:23 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/25 03:30:01 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,7 @@ static void	init_philo_data(t_simul_data *simul_data,
 	philo_data = &table_data->philosophers[philo_idx];
 	philo_data->simul_data = simul_data;
 	philo_data->philo_idx = philo_idx;
-	gettimeofday(&philo_data->eat_time, NULL);
 	philo_data->eat_count = 0;
-	gettimeofday(&philo_data->start_time, NULL);
 	if (philo_idx - 1 >= 0)
 		philo_data->l_fork = &table_data->forks[philo_idx - 1];
 	else
@@ -36,6 +34,8 @@ static void	*philo_act(void *data)
 	t_philo_data	*philo_data;
 
 	philo_data = (t_philo_data *)data;
+	pthread_mutex_lock(&philo_data->simul_data->start_mutex);
+	pthread_mutex_unlock(&philo_data->simul_data->start_mutex);
 	while (!philo_data->simul_data->is_ended)
 	{
 		if (!philo_data->simul_data->is_ended)
@@ -64,6 +64,7 @@ static void	simul_start(t_simul_data *simul_data, t_table_data *table_data)
 		init_philo_data(simul_data, table_data, loop);
 		loop++;
 	}
+	start_mutex_lock(simul_data);
 	loop = 0;
 	while (loop < simul_data->num_philo)
 	{

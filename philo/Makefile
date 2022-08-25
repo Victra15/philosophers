@@ -6,7 +6,7 @@
 #    By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 18:32:24 by yolee             #+#    #+#              #
-#    Updated: 2022/08/24 15:04:52 by yolee            ###   ########.fr        #
+#    Updated: 2022/08/25 03:10:27 by yolee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS =	ft_atoi.c \
 		main.c \
 		action.c \
 		simul_loop.c \
+		simul_ctl.c \
 		time_utils.c \
 
 OBJS = $(SRCS:.c=.o)
