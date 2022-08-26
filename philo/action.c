@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 22:49:54 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/26 14:08:43 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/26 16:27:24 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	grab_forks(t_philo_data *philo_data)
 {
 	if (philo_data->philo_idx % 2)
 	{
-		usleep(philo_data->simul_data->time_to_eat / 2);
+		usleep(500);
 		pthread_mutex_lock(philo_data->l_fork);
 	}
 	else
@@ -77,7 +77,7 @@ void	eating(t_philo_data *philo_data)
 
 void	sleeping(t_philo_data *philo_data)
 {
-	if (print_with_mutex("%dms %d is eating\n",
+	if (print_with_mutex("%dms %d is sleeping\n",
 			philo_data->simul_data,
 			philo_data->philo_idx))
 		return ;
