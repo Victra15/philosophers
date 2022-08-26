@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:44:53 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/26 04:56:03 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/26 13:55:29 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,8 @@ int				print_with_mutex(char *print_msg,
 int				print_eat_with_mutex(char *print_msg,
 					t_simul_data *simul_data,
 					int philo_idx,
+					t_philo_data *philo_data);
+int				print_die_with_mutex(char *print_msg,
+					t_simul_data *simul_data,
 					t_philo_data *philo_data);
 #endif

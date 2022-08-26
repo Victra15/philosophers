@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:16:23 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/25 03:34:30 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/26 14:34:19 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,6 @@ static void	thread_detach_all(t_simul_data *simul_data,
 	}
 }
 
-static struct timeval	calc_starve_time(t_philo_data *philo_data)
-{
-	struct timeval	time_now;
-
-	gettimeofday(&time_now, NULL);
-	return (diff_timeval(time_now, philo_data->eat_time));
-}
-
 static int	is_completed_meal(t_simul_data *simul_data,
 		t_philo_data *philo_data)
 {
@@ -46,22 +38,15 @@ static void	check_philo(t_simul_data *simul_data, t_table_data *table_data)
 {
 	int				loop;
 	int				min_eat_flag;
-	int				time_now;
-	struct timeval	starve_time;
 
 	loop = 0;
 	min_eat_flag = 1;
 	while (loop < simul_data->num_philo)
 	{
-		time_now = conv_timeval_to_ms(calc_curr_time(simul_data));
-		starve_time = calc_starve_time(&table_data->philosophers[loop]);
-		if (comp_timeval(starve_time,
-				conv_ms_to_timeval(simul_data->time_to_die)))
-		{
-			printf("%dms %d died\n", time_now, loop);
-			simul_data->is_ended = 1;
+		if (print_die_with_mutex("%dms %d died\n",
+				simul_data,
+				&table_data->philosophers[loop]))
 			return ;
-		}
 		if (is_completed_meal(simul_data, &table_data->philosophers[loop]))
 			min_eat_flag = 0;
 		loop++;
