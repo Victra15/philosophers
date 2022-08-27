@@ -6,12 +6,12 @@
 #    By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/21 18:32:24 by yolee             #+#    #+#              #
-#    Updated: 2022/08/25 03:10:27 by yolee            ###   ########.fr        #
+#    Updated: 2022/08/27 17:24:07 by yolee            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
 INCLUDE = -lpthread
 NAME = philo
 SRCS =	ft_atoi.c \

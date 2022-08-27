@@ -6,13 +6,13 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 01:16:23 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/26 14:34:19 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:45:02 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	thread_detach_all(t_simul_data *simul_data,
+static void	thread_join_all(t_simul_data *simul_data,
 		t_table_data *table_data)
 {
 	int	loop;
@@ -20,7 +20,8 @@ static void	thread_detach_all(t_simul_data *simul_data,
 	loop = 0;
 	while (loop < simul_data->num_philo)
 	{
-		pthread_detach(table_data->philosophers[loop].philo);
+		pthread_join(table_data->philosophers[loop].philo, NULL);
+		pthread_mutex_destroy(&table_data->forks[loop]);
 		loop++;
 	}
 }
@@ -59,6 +60,7 @@ void	simul_loop(t_simul_data *simul_data, t_table_data *table_data)
 {
 	int	loop;
 
+	pthread_mutex_init(&simul_data->print_mutex, NULL);
 	pthread_mutex_unlock(&simul_data->start_mutex);
 	gettimeofday(&simul_data->start_time, NULL);
 	loop = 0;
@@ -67,10 +69,17 @@ void	simul_loop(t_simul_data *simul_data, t_table_data *table_data)
 		table_data->philosophers[loop].eat_time = simul_data->start_time;
 		loop++;
 	}
-	pthread_mutex_init(&simul_data->print_mutex, NULL);
-	while (!simul_data->is_ended)
+	while (1)
 	{
+		pthread_mutex_lock(&simul_data->print_mutex);
 		check_philo(simul_data, table_data);
+		if (simul_data->is_ended)
+		{
+			pthread_mutex_unlock(&simul_data->print_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(&simul_data->print_mutex);
+		usleep(500);
 	}
-	thread_detach_all(simul_data, table_data);
+	thread_join_all(simul_data, table_data);
 }

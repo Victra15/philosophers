@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:07:31 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/26 14:04:06 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:41:20 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,21 @@ void	start_mutex_lock(t_simul_data *simul_data)
 	pthread_mutex_lock(&simul_data->start_mutex);
 }
 
-int	print_with_mutex(char *print_msg, t_simul_data *simul_data, int philo_idx)
+int	print_with_mutex(char *print_msg,
+		t_simul_data *simul_data,
+		int philo_idx,
+		t_philo_data *philo_data)
 {
 	int	time_now;
 
 	pthread_mutex_lock(&simul_data->print_mutex);
 	if (simul_data->is_ended)
+	{
+		pthread_mutex_unlock(philo_data->l_fork);
+		pthread_mutex_unlock(philo_data->r_fork);
+		pthread_mutex_unlock(&simul_data->print_mutex);
 		return (1);
+	}
 	time_now = conv_timeval_to_ms(calc_curr_time(simul_data));
 	printf(print_msg, time_now, philo_idx);
 	pthread_mutex_unlock(&simul_data->print_mutex);
@@ -40,7 +48,12 @@ int	print_eat_with_mutex(char *print_msg,
 
 	pthread_mutex_lock(&simul_data->print_mutex);
 	if (simul_data->is_ended)
+	{
+		pthread_mutex_unlock(philo_data->l_fork);
+		pthread_mutex_unlock(philo_data->r_fork);
+		pthread_mutex_unlock(&simul_data->print_mutex);
 		return (1);
+	}
 	time_now = conv_timeval_to_ms(calc_curr_time(simul_data));
 	gettimeofday(&philo_data->eat_time, NULL);
 	if (philo_data->simul_data->is_min_eat_time_specified)
@@ -65,7 +78,6 @@ int	print_die_with_mutex(char *print_msg,
 	int				time_now;
 	struct timeval	starve_time;
 
-	pthread_mutex_lock(&simul_data->print_mutex);
 	starve_time = calc_starve_time(philo_data);
 	time_now = conv_timeval_to_ms(calc_curr_time(simul_data));
 	if (comp_timeval(starve_time,
@@ -75,6 +87,5 @@ int	print_die_with_mutex(char *print_msg,
 		printf(print_msg, time_now, philo_data->philo_idx);
 		return (1);
 	}
-	pthread_mutex_unlock(&simul_data->print_mutex);
 	return (0);
 }

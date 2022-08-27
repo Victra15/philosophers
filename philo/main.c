@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:44:36 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/26 16:36:55 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:38:50 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ static void	*philo_act(void *data)
 	philo_data = (t_philo_data *)data;
 	pthread_mutex_lock(&philo_data->simul_data->start_mutex);
 	pthread_mutex_unlock(&philo_data->simul_data->start_mutex);
-	while (!philo_data->simul_data->is_ended)
+	while (1)
 	{
-		if (!philo_data->simul_data->is_ended)
-			thinking(philo_data);
-		if (!philo_data->simul_data->is_ended)
-			eating(philo_data);
-		if (!philo_data->simul_data->is_ended)
-			sleeping(philo_data);
+		if (thinking(philo_data))
+			return (NULL);
+		if (eating(philo_data))
+			return (NULL);
+		if (sleeping(philo_data))
+			return (NULL);
 	}
 	return (NULL);
 }

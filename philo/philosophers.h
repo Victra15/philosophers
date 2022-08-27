@@ -6,7 +6,7 @@
 /*   By: yolee <yolee@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 19:44:53 by yolee             #+#    #+#             */
-/*   Updated: 2022/08/26 13:55:29 by yolee            ###   ########.fr       */
+/*   Updated: 2022/08/27 17:45:48 by yolee            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ typedef struct s_table_data
 
 int				ft_atoi(const char *str);
 int				calc_ms(struct timeval after, struct timeval before);
-void			ft_sleep(int sleep_time_ms, struct timeval before);
+void			ft_sleep(int sleep_time_ms, struct timeval *before);
 
-void			thinking(t_philo_data *philo_data);
-void			eating(t_philo_data *philo_data);
-void			sleeping(t_philo_data *philo_data);
+int				thinking(t_philo_data *philo_data);
+int				eating(t_philo_data *philo_data);
+int				sleeping(t_philo_data *philo_data);
 
 void			simul_loop(t_simul_data *simul_data, t_table_data *table_data);
 
@@ -71,7 +71,8 @@ struct timeval	calc_curr_time(t_simul_data *simul_data);
 void			start_mutex_lock(t_simul_data *simul_data);
 int				print_with_mutex(char *print_msg,
 					t_simul_data *simul_data,
-					int philo_idx);
+					int philo_idx,
+					t_philo_data *philo_data);
 int				print_eat_with_mutex(char *print_msg,
 					t_simul_data *simul_data,
 					int philo_idx,
