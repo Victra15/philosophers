@@ -30,3 +30,5 @@ C언어의 멀티 스레딩 함수와 뮤텍스를 이용하여 구현하는 프
    - number_of_times_each_philosopher_must_eat(Optional parameter): 모든 철학자가 식사를 수행해야 하는 횟수 (모든 철학자가 해당 횟수 이상으로 식사를 진행했을시 시뮬레이션 종료)
 
 # 실행 예시
+
+![화면 캡처 2023-09-12 165816](https://github.com/Victra15/philosophers/assets/68954072/07e23ee6-d9cd-4c92-a55d-57313cd7f870)
